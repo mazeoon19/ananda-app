@@ -74,7 +74,8 @@ body{font-family:'Plex Arabic','Plex',system-ui,sans-serif;-webkit-font-smoothin
 <script>
 (function () {
   var tg = window.Telegram && window.Telegram.WebApp;
-  var inTelegram = !!(tg && tg.initData);
+  // opened from the keyboard button, Telegram gives no initData - but it does give a platform and sendData
+  var inTelegram = !!(tg && ((tg.platform && tg.platform !== 'unknown') || tg.initData));
   if (tg) {
     try { tg.ready(); tg.expand(); tg.setHeaderColor('#0A0A0A'); tg.setBackgroundColor('#0A0A0A'); } catch (e) {}
     var u = tg.initDataUnsafe && tg.initDataUnsafe.user;
